@@ -27,8 +27,8 @@
     {% endif %}
 
     <h2 class="archive__item-title" itemprop="headline">
-      {% if post.link %}
-        <a href="{{ post.link }}">{{ title }}</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
+      {% if post.paperurl %}
+        <a href="{{ post.paperurl }}">{{ title }}</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
       {% else %}
         <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
       {% endif %}
@@ -54,11 +54,18 @@
 
     {% comment %}
       Recommended citation section
-      - 渲染 Markdown 加粗
+      - 题目可点击论文下载链接
       - 本人加粗 + 通讯作者标记 *
+      - 期刊/会议斜体
     {% endcomment %}
     {% if post.citation %}
-      <p>Recommended citation: {{ post.citation | markdownify }}</p>
+      <p>Recommended citation: 
+        {% assign citation_parts = post.citation | split: "|" %}
+        {% assign authors = citation_parts[0] %}
+        {% assign paper_title = citation_parts[1] %}
+        {% assign venue_info = citation_parts[2] %}
+        {{ authors | markdownify }}, <a href="{{ post.paperurl }}">{{ paper_title }}</a>. <i>{{ venue_info }}</i>.
+      </p>
     {% endif %}
 
     {% comment %}
