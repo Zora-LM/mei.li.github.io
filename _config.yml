@@ -35,10 +35,10 @@ author:
   # Academic websites
   academia         : # URL
   arxiv            : # URL - Update with the correct link to your profile
-  googlescholar    : "https://scholar.google.com/citations?user=PS_CX0AAAAAJ"
+  googlescholar    : "https://scholar.google.com/citations?user=P6bLh1MAAAAJ&hl=zh-CN"
   inspire-hep      : # URL
   impactstory      : # URL
-  orcid            : "https://orcid.org/yourorcidurl"
+  orcid            : "https://orcid.org/my-orcid?orcid=0000-0002-9361-7231"
   semantic         : # URL
   ssrn             : # URL
   #pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
@@ -51,7 +51,7 @@ author:
   bitbucket        : # Username - Update with your username on the site
   codepen          : # Username
   dribbble         : # Username
-  github           : "academicpages"
+  github           : "Zora-LM"
   kaggle           : # Username  
   stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")    
 
@@ -84,8 +84,8 @@ author:
 
 # Publication Category - The following the list of publication categories and their headings
 publication_category:
-  books:
-    title: 'Books'
+  #books:
+   # title: 'Books'
   manuscripts:
     title: 'Journal Articles'    
   conferences:
@@ -163,7 +163,7 @@ analytics:
 # Reading Files
 include:
   - .htaccess
-  - _pages
+  - _pages/about
   - files
 exclude:
   - "*.sublime-project"
@@ -233,16 +233,6 @@ collections:
  # talks:
    # output: true
   #  permalink: /:collection/:path/
-
-  nav:
-  - title: "Home"
-    url: "/home/"
-  #- title: "CV"
-  #  url: "/cv/"
-  #- title: "Talks"
-   # url: "/talks/"
-  - title: "Publications"
-    url: "/publications/"
 
 
 # These settings control how pages and collections are included in the site
