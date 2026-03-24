@@ -15,7 +15,6 @@ My work aims to advance AI-driven approaches to scientific discovery, particular
 - Graph representation learning  
 - Causal inference and trustworthy AI  
 - Biomedical AI  
-- Computational biology  
 
 ## Contact
 
