@@ -1,0 +1,9 @@
+---
+title: "Causal subgraph learning for generalizable inductive relation prediction"
+collection: publications
+category: conference
+date: 2024-08-24
+venue: "KDD"
+paperurl: "https://dl.acm.org/doi/abs/10.1145/3637528.3671972"
+citation: "**Mei Li**, Xiaoguang Liu, Hua Ji, and Shuangjia Zheng. Causal subgraph learning for generalizable inductive relation prediction, KDD, 2024: 1610-1620."
+---
