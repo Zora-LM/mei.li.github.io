@@ -11,8 +11,8 @@ paperurl: "https://ieeexplore.ieee.org/abstract/document/10264137"
 
 authors:
   - name: "Mei Li"
-    corresponding: false   # 如果是通讯作者改为 true
-    first: true            # 可选：标记第一作者
+    highlight: true       # 控制加粗（你自己）
+    corresponding: false  # 是否加 *
   - name: "Ye Cao"
   - name: "Xiaoguang Liu"
   - name: "Hua Ji"
