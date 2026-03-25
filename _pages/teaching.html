@@ -5,18 +5,8 @@ permalink: /teaching/
 author_profile: true
 ---
 
-<p>
-  This page lists courses I have taught, including undergraduate and graduate teaching.
-</p>
+{% include base_path %}
 
 {% for post in site.teaching reversed %}
-  <div style="margin-bottom: 25px;">
-    <h3>{{ post.title }}</h3>
-    <p>
-      <strong>{{ post.type }}</strong><br>
-      {{ post.venue }}<br>
-      {{ post.semester }}<br>
-      {{ post.location }}
-    </p>
-  </div>
+  {% include archive-single.html %}
 {% endfor %}
