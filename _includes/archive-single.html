@@ -1,27 +1,71 @@
-{% if post.authors and post.title %}
-  <p>
-    {% for author in post.authors %}
-      {% if forloop.first == false %}, {% endif %}
-      
-      {% if author.corresponding %}
-        <strong>{{ author.name }}</strong>*
-      {% else %}
-        {{ author.name }}
-      {% endif %}
+{% include base_path %}
 
-      {% if forloop.last == false and forloop.index == forloop.length - 1 %}
-        , and
-      {% endif %}
-    {% endfor %}.
-    
-    {% if post.paperurl %}
-      <a href="{{ post.paperurl }}">{{ post.title }}</a>.
-    {% else %}
-      {{ post.title }}.
-    {% endif %}
-    
-    {% if post.venue %}
-      <i>{{ post.venue }}</i>{% if post.date %}, {{ post.date | date: "%Y" }}{% endif %}{% if post.volume %}, {{ post.volume }}{% endif %}{% if post.issue %}({{ post.issue }}){% endif %}{% if post.pages %}: {{ post.pages }}{% endif %}.
-    {% endif %}
-  </p>
+{% if post.header.teaser %}
+  {% capture teaser %}{{ post.header.teaser }}{% endcapture %}
+{% else %}
+  {% assign teaser = site.teaser %}
 {% endif %}
+
+{% if post.id %}
+  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = post.title %}
+{% endif %}
+
+<div class="{{ include.type | default: "list" }}__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+
+    {% if include.type == "grid" and teaser %}
+      <div class="archive__item-teaser">
+        <img src=
+          {% if teaser contains "://" %}
+            "{{ teaser }}"
+          {% else %}
+            "{{ teaser | prepend: "/images/" | prepend: base_path }}"
+          {% endif %}
+          alt="">
+      </div>
+    {% endif %}
+
+    {% comment %}
+      === 一行标准引用（核心部分）===
+    {% endcomment %}
+    {% if post.authors and post.title %}
+      <p>
+
+        {% comment %} ===== 作者 ===== {% endcomment %}
+        {% for author in post.authors %}
+          {% if forloop.first == false %}, {% endif %}
+
+          {% if author.highlight %}
+            <strong>{{ author.name }}</strong>{% if author.corresponding %}*{% endif %}
+          {% else %}
+            {{ author.name }}{% if author.corresponding %}*{% endif %}
+          {% endif %}
+
+          {% if forloop.last == false and forloop.index == forloop.length - 1 %}
+            , and
+          {% endif %}
+        {% endfor %}.
+
+        {% comment %} ===== 标题（可点击） ===== {% endcomment %}
+        {% if post.paperurl %}
+          <a href="{{ post.paperurl }}">{{ post.title }}</a>.
+        {% else %}
+          {{ post.title }}.
+        {% endif %}
+
+        {% comment %} ===== 期刊/会议信息 ===== {% endcomment %}
+        {% if post.venue %}
+          <i>{{ post.venue }}</i>
+          {% if post.date %}, {{ post.date | date: "%Y" }}{% endif %}
+          {% if post.volume %}, {{ post.volume }}{% endif %}
+          {% if post.issue %}({{ post.issue }}){% endif %}
+          {% if post.pages %}: {{ post.pages }}{% endif %}.
+        {% endif %}
+
+      </p>
+    {% endif %}
+
+  </article>
+</div>
