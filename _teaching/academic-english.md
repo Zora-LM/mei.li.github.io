@@ -1,7 +1,7 @@
 ---
 title: "专业英语"
 collection: teaching
-type: "Graduate course"
+type: "研究生课程"
 venue: "信息学院"
 date: 2026-02-01
 semester: "2025–2026 第二学期"
