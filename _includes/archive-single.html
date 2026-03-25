@@ -1,18 +1,10 @@
-<h2 class="archive__item-title" itemprop="headline">
-  {% if post.paperurl %}
-    <a href="{{ post.paperurl }}">{{ title }}</a>
-  {% else %}
-    {{ title }}
-  {% endif %}
-</h2>
-
-{% if post.authors %}
+{% if post.authors and post.title %}
   <p>
     {% for author in post.authors %}
       {% if forloop.first == false %}, {% endif %}
       
       {% if author.corresponding %}
-        <strong>{{ author.name }}</strong>* 
+        <strong>{{ author.name }}</strong>*
       {% else %}
         {{ author.name }}
       {% endif %}
@@ -20,12 +12,16 @@
       {% if forloop.last == false and forloop.index == forloop.length - 1 %}
         , and
       {% endif %}
-    {% endfor %}
-  </p>
-{% endif %}
-
-{% if post.venue %}
-  <p>
-    <i>{{ post.venue }}</i>{% if post.date %}, {{ post.date | date: "%Y" }}{% endif %}{% if post.volume %}, {{ post.volume }}{% endif %}{% if post.issue %}({{ post.issue }}){% endif %}{% if post.pages %}: {{ post.pages }}{% endif %}
+    {% endfor %}.
+    
+    {% if post.paperurl %}
+      <a href="{{ post.paperurl }}">{{ post.title }}</a>.
+    {% else %}
+      {{ post.title }}.
+    {% endif %}
+    
+    {% if post.venue %}
+      <i>{{ post.venue }}</i>{% if post.date %}, {{ post.date | date: "%Y" }}{% endif %}{% if post.volume %}, {{ post.volume }}{% endif %}{% if post.issue %}({{ post.issue }}){% endif %}{% if post.pages %}: {{ post.pages }}{% endif %}.
+    {% endif %}
   </p>
 {% endif %}
