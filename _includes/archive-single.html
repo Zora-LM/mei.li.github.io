@@ -53,9 +53,11 @@
 
         {% comment %} ===== 会议/期刊信息 ===== {% endcomment %}
         {% if post.venue %}
-          <i>{{ post.venue }}</i>
-          {% if post.date %},{{ post.date | date: "%Y" }}{% endif %}
-          {% if post.pages %}:{{ post.pages }}{% endif %}.
+          <i>{{ post.venue }}</i>,
+          {% if post.date %} {{ post.date | date: "%Y" }}{% endif %}
+          {% if post.volume %}, {{ post.volume }}{% endif %}
+          {% if post.number %}, {{ post.number }}{% endif %}
+          {% if post.pages %}: {{ post.pages }}{% endif %}.
         {% endif %}
 
       </p>
