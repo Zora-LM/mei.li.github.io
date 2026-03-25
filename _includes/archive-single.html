@@ -1,75 +1,31 @@
-{% include base_path %}
+<h2 class="archive__item-title" itemprop="headline">
+  {% if post.paperurl %}
+    <a href="{{ post.paperurl }}">{{ title }}</a>
+  {% else %}
+    {{ title }}
+  {% endif %}
+</h2>
 
-{% if post.header.teaser %}
-  {% capture teaser %}{{ post.header.teaser }}{% endcapture %}
-{% else %}
-  {% assign teaser = site.teaser %}
-{% endif %}
-
-{% if post.id %}
-  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
-{% else %}
-  {% assign title = post.title %}
-{% endif %}
-
-<div class="{{ include.type | default: "list" }}__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-
-    {% if include.type == "grid" and teaser %}
-      <div class="archive__item-teaser">
-        <img src=
-          {% if teaser contains "://" %}
-            "{{ teaser }}"
-          {% else %}
-            "{{ teaser | prepend: "/images/" | prepend: base_path }}"
-          {% endif %}
-          alt="">
-      </div>
-    {% endif %}
-
-    <h2 class="archive__item-title" itemprop="headline">
-      {% if post.paperurl %}
-        <a href="{{ post.paperurl }}">{{ title }}</a>
+{% if post.authors %}
+  <p>
+    {% for author in post.authors %}
+      {% if forloop.first == false %}, {% endif %}
+      
+      {% if author.corresponding %}
+        <strong>{{ author.name }}</strong>* 
       {% else %}
-        {{ title }}
+        {{ author.name }}
       {% endif %}
-    </h2>
 
-    {% comment %}
-      作者列表 + 协议作者标记
-    {% endcomment %}
-    {% if post.authors %}
-      <p>
-        {% for author in post.authors %}
-          {% if forloop.first == false %}, {% endif %}
-          {% if author.corresponding %}
-            **{{ author.name }}*** 
-          {% else %}
-            {{ author.name }}
-          {% endif %}
-        {% endfor %}
-      </p>
-    {% endif %}
+      {% if forloop.last == false and forloop.index == forloop.length - 1 %}
+        , and
+      {% endif %}
+    {% endfor %}
+  </p>
+{% endif %}
 
-    {% comment %}
-      期刊 / 会议信息
-    {% endcomment %}
-    {% if post.venue %}
-      <p>
-        <i>{{ post.venue }}</i>{% if post.date %}, {{ post.date | date: "%Y" }}{% endif %}{% if post.volume %}, {{ post.volume }}{% endif %}{% if post.issue %}({{ post.issue }}){% endif %}{% if post.pages %}: {{ post.pages }}{% endif %}
-      </p>
-    {% endif %}
-
-    {% comment %}
-      下载链接（可选）
-    {% endcomment %}
-    {% if post.paperurl or post.slidesurl or post.bibtexurl %}
-      <p>
-        {% if post.paperurl %}<a href="{{ post.paperurl }}">Download Paper</a>{% endif %}
-        {% if post.slidesurl %}{% if post.paperurl %} | {% endif %}<a href="{{ post.slidesurl }}">Download Slides</a>{% endif %}
-        {% if post.bibtexurl %}{% if post.paperurl or post.slidesurl %} | {% endif %}<a href="{{ post.bibtexurl }}">Download Bibtex</a>{% endif %}
-      </p>
-    {% endif %}
-
-  </article>
-</div>
+{% if post.venue %}
+  <p>
+    <i>{{ post.venue }}</i>{% if post.date %}, {{ post.date | date: "%Y" }}{% endif %}{% if post.volume %}, {{ post.volume }}{% endif %}{% if post.issue %}({{ post.issue }}){% endif %}{% if post.pages %}: {{ post.pages }}{% endif %}
+  </p>
+{% endif %}
